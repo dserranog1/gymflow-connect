@@ -13,6 +13,10 @@ import {
 } from "../ui/form";
 import { Input } from "../ui/input";
 import { useMutation } from "@tanstack/react-query";
+import { pb } from "@/services/pocketbase";
+import { ReloadIcon } from "@radix-ui/react-icons";
+import { useToast } from "../ui/use-toast";
+import { User } from "@/types";
 const formSchema = z
   .object({
     name: z.string().min(1, { message: "Campo requerido" }),
@@ -30,14 +34,11 @@ const formSchema = z
     message: "La contraseñas no son iguales",
   });
 
-const onSubmit = (values: z.infer<typeof formSchema>) => {
-  // Do something with the form values.
-  // ✅ This will be type-safe and validated.
-  console.log(values);
-};
+type FormData = z.infer<typeof formSchema>;
 
 export const SignUpForm = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
+  const { toast } = useToast();
+  const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
@@ -49,6 +50,24 @@ export const SignUpForm = () => {
       passwordConfirm: "",
     },
   });
+  const createNewUser = useMutation({
+    mutationFn: (userData: FormData) => {
+      return pb.collection("users").create<User>(userData);
+    },
+    onSuccess: (user) => {
+      toast({
+        title: `Registo exitoso`,
+        description: `Se ha creado el usuario ${user.name}`,
+      });
+    },
+  });
+  const onSubmit = (values: FormData) => {
+    createNewUser.mutate(values, {
+      onSuccess: () => {
+        form.reset();
+      },
+    });
+  };
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -147,7 +166,14 @@ export const SignUpForm = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Registrarme</Button>
+        {createNewUser.isLoading ? (
+          <Button disabled>
+            <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+            Please wait
+          </Button>
+        ) : (
+          <Button type="submit">Registrarme</Button>
+        )}
       </form>
     </Form>
   );
