@@ -1,10 +1,14 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SignUpForm from "@/components/forms/SignUpForm";
+import { ReactElement } from "react";
+import MainLayout from "@/components/layouts/MainLayout";
+import ContentLayout from "@/components/layouts/ContentLayout";
+import { NextPageWithLayout } from "./_app";
 
-const SignUpPage = () => {
+const SignUpPage: NextPageWithLayout = () => {
   return (
-    <div>
-      <Card className="w-80">
+    <div className="mx-auto">
+      <Card>
         <CardHeader>
           <CardTitle>Registro</CardTitle>
         </CardHeader>
@@ -13,6 +17,14 @@ const SignUpPage = () => {
         </CardContent>
       </Card>
     </div>
+  );
+};
+
+SignUpPage.getLayout = function getLayout(page: ReactElement) {
+  return (
+    <MainLayout>
+      <ContentLayout>{page}</ContentLayout>
+    </MainLayout>
   );
 };
 
