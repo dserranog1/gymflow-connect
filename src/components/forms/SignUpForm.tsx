@@ -27,7 +27,7 @@ const formSchema = z
     email: z.string().email({ message: "El email ingresado no es válido" }),
     password: z
       .string({ required_error: "Campo requerida" })
-      .min(1, { message: "La contraseña debe tener al menos 8 carácteres." }),
+      .min(8, { message: "La contraseña debe tener al menos 8 carácteres." }),
     passwordConfirm: z.string({ required_error: "Campo requerido" }),
   })
   .refine((data) => data.password === data.passwordConfirm, {
