@@ -17,6 +17,7 @@ import { pb } from "@/services/pocketbase";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useToast } from "../ui/use-toast";
 import { User } from "@/types";
+import { ClientResponseError } from "pocketbase";
 const formSchema = z
   .object({
     name: z.string().min(1, { message: "Campo requerido" }),
@@ -26,7 +27,7 @@ const formSchema = z
     email: z.string().email({ message: "El email ingresado no es válido" }),
     password: z
       .string({ required_error: "Campo requerida" })
-      .min(8, { message: "La contraseña debe tener al menos 8 carácteres." }),
+      .min(1, { message: "La contraseña debe tener al menos 8 carácteres." }),
     passwordConfirm: z.string({ required_error: "Campo requerido" }),
   })
   .refine((data) => data.password === data.passwordConfirm, {
@@ -59,6 +60,16 @@ export const SignUpForm = () => {
         title: `Registo exitoso`,
         description: `Se ha creado el usuario ${user.name}`,
       });
+    },
+    onError: (error) => {
+      if (error instanceof ClientResponseError) {
+        // TODO parse response error and set more meaningful errors
+        toast({
+          title: "Ha ocurrido un error",
+          description: `Si el error persiste póngase en contacto con soporte`,
+          variant: "destructive",
+        });
+      }
     },
   });
   const onSubmit = (values: FormData) => {
