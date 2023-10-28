@@ -18,6 +18,8 @@ import { ReloadIcon } from "@radix-ui/react-icons";
 import { useToast } from "../ui/use-toast";
 import { User } from "@/types";
 import { ClientResponseError } from "pocketbase";
+import { useRouter } from "next/router";
+
 const formSchema = z
   .object({
     name: z.string().min(1, { message: "Campo requerido" }),
@@ -38,6 +40,7 @@ const formSchema = z
 type FormData = z.infer<typeof formSchema>;
 
 export const SignUpForm = () => {
+  const router = useRouter();
   const { toast } = useToast();
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -60,6 +63,7 @@ export const SignUpForm = () => {
         title: `Registo exitoso`,
         description: `Se ha creado el usuario ${user.name}`,
       });
+      router.push("/");
     },
     onError: (error) => {
       if (error instanceof ClientResponseError) {
@@ -69,6 +73,7 @@ export const SignUpForm = () => {
           description: `Si el error persiste póngase en contacto con soporte`,
           variant: "destructive",
         });
+        console.log({ error });
       }
     },
   });
@@ -180,7 +185,7 @@ export const SignUpForm = () => {
         {createNewUser.isLoading ? (
           <Button disabled>
             <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-            Please wait
+            Procesando
           </Button>
         ) : (
           <Button type="submit">Registrarme</Button>
