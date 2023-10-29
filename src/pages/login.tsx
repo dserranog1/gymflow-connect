@@ -6,8 +6,18 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SignInForm from "@/components/forms/SignInForm";
 import Image from "next/image";
 import GymBackground from "@/assets/gym-login.jpg";
+import { useRouter } from "next/router";
+import { pb } from "@/services/pocketbase";
+import { UpdateIcon } from "@radix-ui/react-icons";
 
 const SignInPage: NextPageWithLayout = () => {
+  const router = useRouter();
+  if (pb.authStore.isValid) {
+    router.push("/dashboard");
+    return (
+      <UpdateIcon className="h-32 w-32 animate-spin self-center my-auto" />
+    );
+  }
   return (
     <>
       <div className="flex flex-row items-center flex-1">
