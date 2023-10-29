@@ -3,6 +3,7 @@ import "@/styles/globals.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { NextPage } from "next";
 import type { AppProps } from "next/app";
+import dynamic from "next/dynamic";
 import { ReactElement, ReactNode } from "react";
 
 export type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> & {
@@ -13,7 +14,7 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
-export default function App({ Component, pageProps }: AppPropsWithLayout) {
+function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
   const queryClient = new QueryClient({
     defaultOptions: {
@@ -31,3 +32,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     </QueryClientProvider>
   );
 }
+export default dynamic(() => Promise.resolve(App), {
+  ssr: false,
+});

@@ -4,44 +4,28 @@ import MainLayout from "@/components/layouts/MainLayout";
 import ContentLayout from "@/components/layouts/ContentLayout";
 import { pb } from "@/services/pocketbase";
 import { Button } from "@/components/ui/button";
-import { toast } from "@/components/ui/use-toast";
-import { useQueryClient } from "@tanstack/react-query";
 import { User } from "@/types";
-import { useRouter } from "next/router";
+import Auth from "@/components/layouts/Auth";
 
-const SignInPage: NextPageWithLayout = () => {
-  const queryClient = useQueryClient();
-  const user = queryClient.getQueryData<User>(["user"]);
-  console.log(user);
-  const router = useRouter();
+const Dashboard: NextPageWithLayout = () => {
+  const user = pb.authStore.model as User;
   return (
     <>
-      <div className="flex flex-row items-center flex-1">
+      <div className="flex flex-col items-center flex-1 gap-24 justify-center">
         <h1 className="text-3xl">Dashboard page for {user?.name}</h1>
-        <Button
-          onClick={() => {
-            // pb.authStore.clear();
-            // toast({
-            //   title: `Hasta pronto!`,
-            // });
-            // queryClient.removeQueries(["user"]);
-            // router.push("/");
-            console.log(queryClient.getQueryData<User>(["user"]));
-          }}
-        >
-          Cerrar sesión
-        </Button>
       </div>
     </>
   );
 };
 
-SignInPage.getLayout = function getLayout(page: ReactElement) {
+Dashboard.getLayout = function getLayout(page: ReactElement) {
   return (
     <MainLayout>
-      <ContentLayout>{page}</ContentLayout>
+      <ContentLayout>
+        <Auth>{page}</Auth>
+      </ContentLayout>
     </MainLayout>
   );
 };
 
-export default SignInPage;
+export default Dashboard;

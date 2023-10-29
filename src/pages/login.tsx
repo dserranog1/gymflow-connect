@@ -6,8 +6,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SignInForm from "@/components/forms/SignInForm";
 import Image from "next/image";
 import GymBackground from "@/assets/gym-login.jpg";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 
 const SignInPage: NextPageWithLayout = () => {
   return (

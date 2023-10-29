@@ -4,8 +4,18 @@ import ContentLayout from "@/components/layouts/ContentLayout";
 import { ReactElement } from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { pb } from "@/services/pocketbase";
+import { UpdateIcon } from "@radix-ui/react-icons";
+import { useRouter } from "next/router";
 
 const Home: NextPageWithLayout = () => {
+  const router = useRouter();
+  if (pb.authStore.isValid) {
+    router.push("/dashboard");
+    return (
+      <UpdateIcon className="h-32 w-32 animate-spin self-center my-auto" />
+    );
+  }
   return (
     <div className="flex-1 flex flex-col justify-center items-center gap-8">
       <h1 className="text-3xl">

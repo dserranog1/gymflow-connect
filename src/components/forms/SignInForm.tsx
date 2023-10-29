@@ -12,7 +12,7 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { pb } from "@/services/pocketbase";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useToast } from "../ui/use-toast";
@@ -32,7 +32,6 @@ type FormData = z.infer<typeof formSchema>;
 export const SignInForm = () => {
   const router = useRouter();
   const { toast } = useToast();
-  const queryClient = useQueryClient();
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -50,8 +49,6 @@ export const SignInForm = () => {
       toast({
         title: `Bievenido de nuevo ${user.record.name}`,
       });
-      queryClient.setQueryData(["user"], user.record);
-      console.log(queryClient.getQueryData(["user"]));
       router.push("/dashboard");
     },
     onError: (error) => {
