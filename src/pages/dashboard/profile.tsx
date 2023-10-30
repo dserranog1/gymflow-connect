@@ -4,6 +4,8 @@ import ContentLayout from "@/components/layouts/ContentLayout";
 import Auth from "@/components/layouts/Auth";
 import { useUser } from "@/hooks/use-user";
 import { UpdateIcon } from "@radix-ui/react-icons";
+import UpdateUserForm from "@/components/forms/UpdateUserForm";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Profile: NextPageWithLayout = () => {
   const { data: user, isError, isLoading } = useUser("profile");
@@ -21,11 +23,16 @@ const Profile: NextPageWithLayout = () => {
     );
   }
   return (
-    <>
-      <div className="flex flex-col items-center flex-1 gap-24 justify-center">
-        <h1 className="text-3xl">Profile para {user?.name}</h1>
-      </div>
-    </>
+    <div className="mx-auto my-20">
+      <Card>
+        <CardHeader>
+          <CardTitle>Actualización de datos</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <UpdateUserForm user={user} />
+        </CardContent>
+      </Card>
+    </div>
   );
 };
 
