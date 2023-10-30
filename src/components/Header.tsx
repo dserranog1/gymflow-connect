@@ -1,6 +1,8 @@
 import { useUser } from "@/hooks/use-user";
 import LogOutButton from "./LogOutButton";
 import { pb } from "@/services/pocketbase";
+import Link from "next/link";
+import { Button } from "./ui/button";
 
 const Header = () => {
   const { data: user, isLoading } = useUser("header");
@@ -17,7 +19,9 @@ const Header = () => {
           <LogOutButton />
         </div>
       ) : (
-        <div>Gymflow connect</div>
+        <Button asChild variant="link">
+          <Link href="/">Gymflow connect</Link>
+        </Button>
       )}
     </header>
   );
