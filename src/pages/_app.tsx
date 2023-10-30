@@ -27,11 +27,15 @@ export const queryClient = new QueryClient({
 
 function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
-  return getLayout(
+  return (
     <QueryClientProvider client={queryClient}>
       <MainLayout>
-        <Component {...pageProps} />
-        <Toaster />
+        {getLayout(
+          <>
+            <Component {...pageProps} />
+            <Toaster />
+          </>
+        )}
       </MainLayout>
     </QueryClientProvider>
   );
