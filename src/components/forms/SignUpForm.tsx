@@ -19,6 +19,7 @@ import { useToast } from "../ui/use-toast";
 import { User } from "@/types";
 import { ClientResponseError } from "pocketbase";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 const formSchema = z
   .object({
@@ -188,9 +189,14 @@ export const SignUpForm = () => {
             Procesando
           </Button>
         ) : (
-          <Button className="bg-orange-600 hover:bg-orange-400" type="submit">
-            Registrarme
-          </Button>
+          <>
+            <Button className="bg-orange-600 hover:bg-orange-400" type="submit">
+              Registrarme
+            </Button>
+            <Button asChild variant="link">
+              <Link href="/">Cancelar</Link>
+            </Button>
+          </>
         )}
       </form>
     </Form>
