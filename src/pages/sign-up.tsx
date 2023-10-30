@@ -15,7 +15,7 @@ const SignUpPage: NextPageWithLayout = () => {
     );
   }
   return (
-    <div className="mx-auto my-20">
+    <div className="mx-auto my-auto">
       <Card>
         <CardHeader>
           <CardTitle>Registro</CardTitle>

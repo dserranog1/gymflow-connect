@@ -10,7 +10,7 @@ const Header = () => {
         <div className="flex flex-row justify-between items-center">
           <p>
             Sesión iniciada como{" "}
-            <span className="text-slate-300">
+            <span className="text-amber-300">
               {user?.name + " " + user?.lastName}
             </span>
           </p>

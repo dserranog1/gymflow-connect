@@ -26,7 +26,7 @@ const Dashboard: NextPageWithLayout = () => {
     <>
       <div className="flex flex-col items-center flex-1 gap-24 justify-center">
         <h1 className="text-3xl">Dashboard para {user?.name}</h1>
-        <Button asChild>
+        <Button className="bg-orange-600 hover:bg-orange-400" asChild>
           <Link href="dashboard/profile">Ver/editar informacion personal</Link>
         </Button>
       </div>

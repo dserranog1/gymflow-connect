@@ -101,13 +101,15 @@ export const SignInForm = () => {
           )}
         />
         {loginUser.isLoading ? (
-          <Button disabled>
+          <Button className="bg-orange-600 hover:bg-orange-400" disabled>
             <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
             Procesando
           </Button>
         ) : (
           <>
-            <Button type="submit">Iniciar sesión</Button>
+            <Button className="bg-orange-600 hover:bg-orange-400" type="submit">
+              Iniciar sesión
+            </Button>
             <Button asChild variant="link">
               <Link href="/sign-up">Registrarme</Link>
             </Button>
