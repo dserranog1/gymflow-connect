@@ -7,7 +7,6 @@ import { UpdateIcon } from "@radix-ui/react-icons";
 const Auth: FC<PropsWithChildren> = ({ children }) => {
   const router = useRouter();
   const { toast } = useToast();
-  console.log("rendering Auth");
   if (!pb.authStore.isValid) {
     toast({
       variant: "destructive",

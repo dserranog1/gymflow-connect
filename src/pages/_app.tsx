@@ -1,3 +1,4 @@
+import MainLayout from "@/components/layouts/MainLayout";
 import { Toaster } from "@/components/ui/toaster";
 import "@/styles/globals.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -14,21 +15,24 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
+export const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      //never re-fetch unless query is invalited manualy
+      staleTime: Infinity,
+      cacheTime: Infinity,
+    },
+  },
+});
+
 function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        //never re-fetch unless query is invalited manualy
-        staleTime: Infinity,
-        cacheTime: Infinity,
-      },
-    },
-  });
   return getLayout(
     <QueryClientProvider client={queryClient}>
-      <Component {...pageProps} />
-      <Toaster />
+      <MainLayout>
+        <Component {...pageProps} />
+        <Toaster />
+      </MainLayout>
     </QueryClientProvider>
   );
 }

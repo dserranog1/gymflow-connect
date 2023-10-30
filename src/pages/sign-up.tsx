@@ -1,7 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import SignUpForm from "@/components/forms/SignUpForm";
 import { ReactElement } from "react";
-import MainLayout from "@/components/layouts/MainLayout";
 import ContentLayout from "@/components/layouts/ContentLayout";
 import { NextPageWithLayout } from "./_app";
 import { UpdateIcon } from "@radix-ui/react-icons";
@@ -30,11 +29,7 @@ const SignUpPage: NextPageWithLayout = () => {
 };
 
 SignUpPage.getLayout = function getLayout(page: ReactElement) {
-  return (
-    <MainLayout>
-      <ContentLayout>{page}</ContentLayout>
-    </MainLayout>
-  );
+  return <ContentLayout>{page}</ContentLayout>;
 };
 
 export default SignUpPage;

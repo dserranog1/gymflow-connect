@@ -12,7 +12,7 @@ import {
   FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { pb } from "@/services/pocketbase";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useToast } from "../ui/use-toast";
@@ -30,6 +30,7 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 
 export const SignInForm = () => {
+  const queryClient = useQueryClient();
   const router = useRouter();
   const { toast } = useToast();
   const form = useForm<FormData>({
@@ -49,6 +50,7 @@ export const SignInForm = () => {
       toast({
         title: `Bievenido de nuevo ${user.record.name}`,
       });
+      queryClient.setQueryData(["user"], user.record);
       router.push("/dashboard");
     },
     onError: (error) => {
