@@ -6,9 +6,11 @@ const LogOutButton = () => {
   return (
     <Button
       asChild
+      className="text-amber-300"
       onClick={() => {
         pb.authStore.clear();
       }}
+      variant="link"
     >
       <Link href="/">Cerrar sesión</Link>
     </Button>
