@@ -6,11 +6,15 @@ import Link from "next/link";
 import Header from "../Header";
 
 const MainLayout: FC<PropsWithChildren> = ({ children }) => {
+  const backgroundStyle = {
+    backgroundImage: `url("/src/assets/fondo.jpg")`,
+    backgroundSize: "cover", // Puedes ajustar esto según tus necesidades
+  };
   return (
-    <div className="flex h-full min-h-screen flex-col bg-slate-100 justify-between">
+    <div className="flex h-full min-h-screen flex-col">
       <Header />
-      <main className="flex flex-col flex-1">{children}</main>
-      <footer>footer goes here!</footer>
+      <main className="flex flex-col flex-1 ">{children}</main>
+      <footer className = "flex items-center justify-center text-lg bg-gradient-to-r from-[#FFA500] to-[#FF6347] text-white">2023, All Rights Reserved Gymflow App</footer>
     </div>
   );
 };

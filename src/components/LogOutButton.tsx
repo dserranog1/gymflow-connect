@@ -6,7 +6,7 @@ const LogOutButton = () => {
   return (
     <Button
       asChild
-      className="text-amber-300"
+      className="text-amber-300 ml-auto"
       onClick={() => {
         pb.authStore.clear();
       }}

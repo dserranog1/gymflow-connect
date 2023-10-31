@@ -7,12 +7,12 @@ import { Button } from "./ui/button";
 const Header = () => {
   const { data: user, isLoading } = useUser("header");
   return (
-    <header className="bg-orange-600">
+    <header className="flex justify-center items-center bg-gradient-to-r from-[#FFA500] to-[#FF6347]">
       {pb.authStore.isValid && !isLoading ? (
         <div className="flex flex-row justify-between items-center">
           <p>
             Sesión iniciada como{" "}
-            <span className="text-amber-300">
+            <span className="text-white">
               {user?.name + " " + user?.lastName}
             </span>
           </p>
@@ -20,7 +20,9 @@ const Header = () => {
         </div>
       ) : (
         <Button asChild variant="link">
-          <Link href="/">Gymflow connect</Link>
+          <Link href="/">
+            <span className="text-lg text-white">Gymflow connect</span>
+          </Link>
         </Button>
       )}
     </header>

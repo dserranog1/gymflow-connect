@@ -20,6 +20,9 @@ const Home: NextPageWithLayout = () => {
       <h1 className="text-3xl">
         Bienvenido a <span className="text-orange-600">Gymflow Connect</span>
       </h1>
+      <h1 className="text-3xl">
+        Donde el progreso se encuentra con la persistencia
+      </h1>
       <h3 className="text-xl">Registrate o inicia sesión para continuar</h3>
       <div className="flex gap-8">
         <Button asChild className="bg-orange-600 hover:bg-orange-400">
