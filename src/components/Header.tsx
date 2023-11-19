@@ -11,10 +11,14 @@ const Header = () => {
       {pb.authStore.isValid && !isLoading ? (
         <div className="flex flex-row justify-between items-center">
           <p>
-            Sesión iniciada como{" "}
-            <span className="text-white">
-              {user?.name + " " + user?.lastName}
-            </span>
+            {user && (
+              <>
+                Sesión iniciada como{" "}
+                <span className="text-white">
+                  {user.name + " " + user.lastName}
+                </span>
+              </>
+            )}
           </p>
           <LogOutButton />
         </div>

@@ -17,7 +17,8 @@ const Dashboard: NextPageWithLayout = () => {
   if (isError) {
     return (
       <div className="flex flex-row items-center justify-center flex-1">
-        Error al cargar la información del usuario
+        Error al cargar la información del usuario, intenta cerrar sesión y
+        entrar de nuevo
       </div>
     );
   }
