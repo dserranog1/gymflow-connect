@@ -6,7 +6,7 @@ import { useUser } from "@/hooks/use-user";
 import { UpdateIcon } from "@radix-ui/react-icons";
 import Admin from "@/components/layouts/Admin";
 
-const Classes: NextPageWithLayout = () => {
+const Employees: NextPageWithLayout = () => {
   const { data: user, isError, isLoading } = useUser();
   if (isLoading) {
     return (
@@ -24,13 +24,13 @@ const Classes: NextPageWithLayout = () => {
   return (
     <>
       <div className="flex flex-col items-center flex-1 gap-24 justify-center">
-        <h1 className="text-3xl">Clases!</h1>
+        <h1 className="text-3xl">Employees!</h1>
       </div>
     </>
   );
 };
 
-Classes.getLayout = function getLayout(page: ReactElement) {
+Employees.getLayout = function getLayout(page: ReactElement) {
   return (
     <ContentLayout>
       <Auth>
@@ -40,4 +40,4 @@ Classes.getLayout = function getLayout(page: ReactElement) {
   );
 };
 
-export default Classes;
+export default Employees;

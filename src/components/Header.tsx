@@ -13,14 +13,14 @@ const Header = () => {
           {user && (
             <>
               {user.isAdmin && (
-                <div className="">
-                  <Button className="" asChild variant="link">
-                    <Link href="/classes">
+                <div>
+                  <Button asChild variant="link">
+                    <Link href="/dashboard/classes">
                       <span className="text-lg text-white">Clases</span>
                     </Link>
                   </Button>
                   <Button className="" asChild variant="link">
-                    <Link href="/employees">
+                    <Link href="/dashboard/employees">
                       <span className="text-lg text-white">Empleados</span>
                     </Link>
                   </Button>
