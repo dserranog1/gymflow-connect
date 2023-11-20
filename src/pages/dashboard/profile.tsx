@@ -8,7 +8,7 @@ import UpdateUserForm from "@/components/forms/UpdateUserForm";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 const Profile: NextPageWithLayout = () => {
-  const { data: user, isError, isLoading } = useUser("profile");
+  const { data: user, isError, isLoading } = useUser();
 
   if (isLoading) {
     return (

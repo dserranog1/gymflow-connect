@@ -5,4 +5,5 @@ export interface User {
   lastName: string;
   secondLastName: string;
   email: string;
+  isAdmin: boolean;
 }

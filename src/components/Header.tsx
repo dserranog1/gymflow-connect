@@ -5,21 +5,35 @@ import Link from "next/link";
 import { Button } from "./ui/button";
 
 const Header = () => {
-  const { data: user, isLoading } = useUser("header");
+  const { data: user, isLoading } = useUser();
   return (
-    <header className="flex justify-center items-center bg-gradient-to-r from-[#FFA500] to-[#FF6347]">
+    <header className="w-full bg-gradient-to-r from-[#FFA500] to-[#FF6347]">
       {pb.authStore.isValid && !isLoading ? (
-        <div className="flex flex-row justify-between items-center">
-          <p>
-            {user && (
-              <>
+        <div className="flex justify-between items-center flex-row">
+          {user && (
+            <>
+              {user.isAdmin && (
+                <div className="">
+                  <Button className="" asChild variant="link">
+                    <Link href="/classes">
+                      <span className="text-lg text-white">Clases</span>
+                    </Link>
+                  </Button>
+                  <Button className="" asChild variant="link">
+                    <Link href="/employees">
+                      <span className="text-lg text-white">Empleados</span>
+                    </Link>
+                  </Button>
+                </div>
+              )}
+              <div className="px-4">
                 Sesión iniciada como{" "}
                 <span className="text-white">
                   {user.name + " " + user.lastName}
                 </span>
-              </>
-            )}
-          </p>
+              </div>
+            </>
+          )}
           <LogOutButton />
         </div>
       ) : (

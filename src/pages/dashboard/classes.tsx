@@ -2,10 +2,9 @@ import { ReactElement } from "react";
 import { NextPageWithLayout } from "../_app";
 import ContentLayout from "@/components/layouts/ContentLayout";
 import Auth from "@/components/layouts/Auth";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { useUser } from "@/hooks/use-user";
 import { UpdateIcon } from "@radix-ui/react-icons";
+import Admin from "@/components/layouts/Admin";
 
 const Dashboard: NextPageWithLayout = () => {
   const { data: user, isError, isLoading } = useUser();
@@ -14,11 +13,10 @@ const Dashboard: NextPageWithLayout = () => {
       <UpdateIcon className="h-32 w-32 animate-spin self-center my-auto" />
     );
   }
-  if (isError) {
+  if (isError || !user) {
     return (
       <div className="flex flex-row items-center justify-center flex-1">
-        Error al cargar la información del usuario, intenta cerrar sesión y
-        entrar de nuevo
+        Error al cargar la información intenta cerrar sesión y entrar de nuevo
       </div>
     );
   }
@@ -26,10 +24,7 @@ const Dashboard: NextPageWithLayout = () => {
   return (
     <>
       <div className="flex flex-col items-center flex-1 gap-24 justify-center">
-        <h1 className="text-3xl">Dashboard para {user?.name}</h1>
-        <Button className="bg-orange-600 hover:bg-orange-400" asChild>
-          <Link href="dashboard/profile">Ver/editar informacion personal</Link>
-        </Button>
+        <h1 className="text-3xl">Clases!</h1>
       </div>
     </>
   );
@@ -38,7 +33,9 @@ const Dashboard: NextPageWithLayout = () => {
 Dashboard.getLayout = function getLayout(page: ReactElement) {
   return (
     <ContentLayout>
-      <Auth>{page}</Auth>
+      <Auth>
+        <Admin>{page}</Admin>
+      </Auth>
     </ContentLayout>
   );
 };
