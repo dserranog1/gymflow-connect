@@ -7,9 +7,9 @@ import { useUser } from "@/hooks/use-user";
 const Admin: FC<PropsWithChildren> = ({ children }) => {
   const router = useRouter();
   const { toast } = useToast();
-  const { data: user } = useUser();
+  const { data: user, isLoading } = useUser();
   useEffect(() => {
-    if (!user?.isAdmin) {
+    if (!isLoading && !user?.isAdmin) {
       router.replace("/dashboard");
       toast({
         variant: "destructive",
