@@ -4,20 +4,25 @@ import ContentLayout from "@/components/layouts/ContentLayout";
 import Auth from "@/components/layouts/Auth";
 import { UpdateIcon } from "@radix-ui/react-icons";
 import Admin from "@/components/layouts/Admin";
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { Class } from "@/types";
 import { DataTable } from "@/components/ui/data-table";
 import { useClasses } from "@/hooks/use-classes";
+import AttendeesDialogTable from "@/components/AttendeesDialogTable";
 
-export const columns: ColumnDef<Class>[] = [
+const columnHelper = createColumnHelper<Class>();
+
+export const columns: ColumnDef<Class, string[]>[] = [
   {
     accessorKey: "name",
     header: "Name",
   },
-  {
-    accessorKey: "attendees",
-    header: "Attendees",
-  },
+  columnHelper.accessor("attendees", {
+    header: "attendees",
+    cell: (props) => {
+      return <AttendeesDialogTable usersIds={props.getValue()} />;
+    },
+  }),
   {
     accessorKey: "date",
     header: "Date",

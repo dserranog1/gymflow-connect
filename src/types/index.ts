@@ -19,6 +19,6 @@ export interface Class {
   name: string;
   maxAttendees: number;
   date: Date;
-  attendees: User[];
+  attendees: string[];
   difficulty: Difficulty;
 }
