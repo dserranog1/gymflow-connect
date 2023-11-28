@@ -8,7 +8,7 @@ export interface User {
   isAdmin: boolean;
 }
 
-enum Difficulty {
+export enum Difficulty {
   low = "low",
   medium = "medium",
   high = "high",

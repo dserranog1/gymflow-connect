@@ -9,6 +9,8 @@ import { Class } from "@/types";
 import { DataTable } from "@/components/ui/data-table";
 import { useClasses } from "@/hooks/use-classes";
 import AttendeesDialogTable from "@/components/AttendeesDialogTable";
+import { Button } from "@/components/ui/button";
+import CreateClassDialog from "@/components/CreateClassDialog";
 
 const columnHelper = createColumnHelper<Class>();
 
@@ -55,9 +57,10 @@ const Classes: NextPageWithLayout = () => {
   return (
     <>
       <div className="flex flex-col items-center flex-1 gap-24 justify-center">
-        <h1 className="text-3xl">
+        <div>
+          <CreateClassDialog />
           <DataTable columns={columns} data={classes} />
-        </h1>
+        </div>
       </div>
     </>
   );

@@ -43,7 +43,7 @@ const AttendeesDialogTable: FC<Props> = ({ usersIds }) => {
 
   if (isLoading) {
     return (
-      <UpdateIcon className="h-32 w-32 animate-spin self-center my-auto" />
+      <UpdateIcon className="h-4 w-4 animate-spin self-center my-auto" />
     );
   }
   if (isError || !users) {
@@ -53,7 +53,6 @@ const AttendeesDialogTable: FC<Props> = ({ usersIds }) => {
       </div>
     );
   }
-  console.log(users);
 
   return (
     <AlertDialog>

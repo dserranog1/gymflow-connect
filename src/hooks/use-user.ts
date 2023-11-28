@@ -13,6 +13,9 @@ export const getCurrentUserData = () => {
 };
 
 export const getFilteredUserList = (filter: string) => {
+  if (!filter) {
+    return []
+  }
   return pb.collection("users").getFullList<User>({ filter });
 };
 
