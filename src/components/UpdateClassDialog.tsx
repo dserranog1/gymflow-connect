@@ -22,7 +22,7 @@ const UpdateClassDialog: FC<Props> = ({ classData }) => {
           variant="outline"
           className="mb-4 bg-orange-200 hover:bg-orange-100"
         >
-          Update
+          Actualizar
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>

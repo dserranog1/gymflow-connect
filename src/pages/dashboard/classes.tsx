@@ -18,28 +18,28 @@ const columnHelper = createColumnHelper<Class>();
 export const columns: ColumnDef<Class, string[] & string & boolean>[] = [
   {
     accessorKey: "name",
-    header: "Name",
+    header: "Nombre",
   },
   columnHelper.accessor("attendees", {
-    header: "attendees",
+    header: "Asistentes",
     cell: (props) => {
       return <AttendeesDialogTable usersIds={props.getValue()} />;
     },
   }),
   {
     accessorKey: "date",
-    header: "Date",
+    header: "Fecha",
   },
   {
     accessorKey: "difficulty",
-    header: "Difficulty",
+    header: "Dificultad",
   },
   {
     accessorKey: "maxAttendees",
-    header: "Maximum attendees",
+    header: "Maximos asistentes",
   },
   columnHelper.accessor("isActive", {
-    header: "Activa",
+    header: "Habilitada",
     cell: (props) => {
       const isActive = props.getValue();
       if (isActive) {

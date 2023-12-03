@@ -42,9 +42,7 @@ const AttendeesDialogTable: FC<Props> = ({ usersIds }) => {
   const { data: users, isError, isLoading } = UseFilteredUserList(filter);
 
   if (isLoading) {
-    return (
-      <UpdateIcon className="h-4 w-4 animate-spin self-center my-auto" />
-    );
+    return <UpdateIcon className="h-4 w-4 animate-spin self-center my-auto" />;
   }
   if (isError || !users) {
     return (
@@ -57,12 +55,12 @@ const AttendeesDialogTable: FC<Props> = ({ usersIds }) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="outline">Show full list</Button>
+        <Button variant="outline">Mostrar todos</Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <DataTable columns={columns} data={users} />
         <AlertDialogFooter>
-          <AlertDialogCancel>Close</AlertDialogCancel>
+          <AlertDialogCancel>Cerrar</AlertDialogCancel>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
