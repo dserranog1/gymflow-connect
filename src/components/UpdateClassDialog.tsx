@@ -28,7 +28,7 @@ const UpdateClassDialog: FC<Props> = ({ classData }) => {
       <AlertDialogContent>
         <UpdateClassForm classData={classData} />
         <AlertDialogFooter>
-          <AlertDialogCancel>Close</AlertDialogCancel>
+          <AlertDialogCancel>Cerrar</AlertDialogCancel>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
