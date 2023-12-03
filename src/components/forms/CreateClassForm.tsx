@@ -201,7 +201,7 @@ export const CreateClassForm = () => {
           name="isActive"
           render={({ field }) => (
             <FormItem className="flex flex-row items-center justify-between">
-              <FormLabel>Activa</FormLabel>
+              <FormLabel>Habilitada</FormLabel>
               <FormControl>
                 <Switch
                   checked={field.value}
