@@ -22,3 +22,18 @@ export interface Class {
   attendees: string[];
   difficulty: Difficulty;
 }
+
+export enum EmployeeRol {
+  trainer = 'trainer',
+  personal_trainer = 'personal_trainer',
+  class_trainer = 'class_trainer',
+  support = 'support'
+
+}
+
+export interface Employee {
+  name: string,
+  lastName: string,
+  isActive: boolean,
+
+}

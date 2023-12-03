@@ -7,6 +7,7 @@ import * as z from "zod";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -17,7 +18,7 @@ import { useMutation } from "@tanstack/react-query";
 import { pb } from "@/services/pocketbase";
 import { ReloadIcon } from "@radix-ui/react-icons";
 import { useToast } from "../ui/use-toast";
-import { Class, Difficulty } from "@/types";
+import { Employee, EmployeeRol } from "@/types";
 import { ClientResponseError } from "pocketbase";
 import { useRouter } from "next/router";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
@@ -32,42 +33,41 @@ import {
   SelectValue,
 } from "../ui/select";
 import { queryClient } from "@/pages/_app";
+import { Switch } from "../ui/switch";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Campo requerido" }),
-  maxAttendees: z.coerce
-    .number({ required_error: "Campo requerido" })
-    .gt(0, { message: "Debe haber mínimo 1 asistente" }),
-  date: z.date().min(new Date(), { message: "La clase debe ser a futuro" }),
-  difficulty: z.nativeEnum(Difficulty, {
-    required_error: "Debe ser una de:  high, medium, low",
+  lastName: z.string().min(1, { message: "Campo requerido" }),
+  isActive: z.boolean(),
+  role: z.nativeEnum(EmployeeRol, {
+    required_error: "Seleccione una",
   }),
 });
 
 type FormData = z.infer<typeof formSchema>;
 
-export const CreateClassForm = () => {
+export const CreateEmployeeForm = () => {
   const router = useRouter();
   const { toast } = useToast();
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      date: new Date(),
-      maxAttendees: 0,
+      lastName: "",
+      isActive: true,
     },
   });
-  const createNewClass = useMutation({
-    mutationFn: (classData: FormData) => {
-      return pb.collection("classes").create<Class>(classData);
+  const createNewEmployee = useMutation({
+    mutationFn: (employeeData: FormData) => {
+      return pb.collection("employees").create<Employee>(employeeData);
     },
-    onSuccess: (newClass) => {
-      queryClient.invalidateQueries({ queryKey: ["classes"] });
+    onSuccess: (newEmployee) => {
+      queryClient.invalidateQueries({ queryKey: ["employees"] });
       toast({
-        title: `Creación exitosa`,
-        description: `Se ha creado la clase ${newClass.name}`,
+        title: `Registo exitoso`,
+        description: `Se ha creado el empleado ${newEmployee.name}`,
       });
-      router.push("/dashboard/classes");
+      router.push("/dashboard/employees");
     },
     onError: (error) => {
       if (error instanceof ClientResponseError) {
@@ -83,7 +83,7 @@ export const CreateClassForm = () => {
   });
   const onSubmit = (values: FormData) => {
     console.log(values);
-    createNewClass.mutate(values, {
+    createNewEmployee.mutate(values, {
       onSuccess: () => {
         form.reset();
       },
@@ -100,7 +100,7 @@ export const CreateClassForm = () => {
               <FormItem>
                 <FormLabel>Nombre*</FormLabel>
                 <FormControl>
-                  <Input placeholder="Yoga" {...field} />
+                  <Input placeholder="Juan" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -108,12 +108,12 @@ export const CreateClassForm = () => {
           />
           <FormField
             control={form.control}
-            name="maxAttendees"
+            name="lastName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Máximos asistentes</FormLabel>
+                <FormLabel>Apellido *</FormLabel>
                 <FormControl>
-                  <Input type="number" {...field} />
+                  <Input placeholder="Perez" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -122,53 +122,25 @@ export const CreateClassForm = () => {
         </div>
         <FormField
           control={form.control}
-          name="date"
+          name="isActive"
           render={({ field }) => (
-            <FormItem>
-              <FormLabel className="mr-4">Fecha*</FormLabel>
+            <FormItem className="flex flex-row items-center justify-between">
+              <FormLabel>Activo</FormLabel>
               <FormControl>
-                <Popover>
-                  <PopoverTrigger asChild>
-                    <FormControl>
-                      <Button
-                        variant={"outline"}
-                        className={cn(
-                          "w-[240px] pl-3 text-left font-normal",
-                          !field.value && "text-muted-foreground"
-                        )}
-                      >
-                        {field.value ? (
-                          format(field.value, "PPP")
-                        ) : (
-                          <span>Pick a date</span>
-                        )}
-                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                      </Button>
-                    </FormControl>
-                  </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
-                    <Calendar
-                      mode="single"
-                      selected={field.value}
-                      onSelect={field.onChange}
-                      disabled={(date) =>
-                        date < new Date() || date < new Date("1900-01-01")
-                      }
-                      initialFocus
-                    />
-                  </PopoverContent>
-                </Popover>
+                <Switch
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
         <FormField
           control={form.control}
-          name="difficulty"
+          name="role"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Dificultad*</FormLabel>
+              <FormLabel>Rol*</FormLabel>
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
@@ -176,14 +148,17 @@ export const CreateClassForm = () => {
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value={Difficulty.low}>
-                    {Difficulty.low}
+                  <SelectItem value={EmployeeRol.class_trainer}>
+                    {EmployeeRol.class_trainer}
                   </SelectItem>
-                  <SelectItem value={Difficulty.medium}>
-                    {Difficulty.medium}
+                  <SelectItem value={EmployeeRol.personal_trainer}>
+                    {EmployeeRol.personal_trainer}
                   </SelectItem>
-                  <SelectItem value={Difficulty.high}>
-                    {Difficulty.high}
+                  <SelectItem value={EmployeeRol.support}>
+                    {EmployeeRol.support}
+                  </SelectItem>
+                  <SelectItem value={EmployeeRol.trainer}>
+                    {EmployeeRol.trainer}
                   </SelectItem>
                 </SelectContent>
               </Select>
@@ -191,7 +166,7 @@ export const CreateClassForm = () => {
             </FormItem>
           )}
         />
-        {createNewClass.isLoading ? (
+        {createNewEmployee.isLoading ? (
           <Button disabled>
             <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
             Procesando
@@ -211,4 +186,4 @@ export const CreateClassForm = () => {
   );
 };
 
-export default CreateClassForm;
+export default CreateEmployeeForm;
