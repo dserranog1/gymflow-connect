@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 import { NextPageWithLayout } from "../_app";
 import ContentLayout from "@/components/layouts/ContentLayout";
 import Auth from "@/components/layouts/Auth";
-import { CheckIcon, Cross1Icon, UpdateIcon } from "@radix-ui/react-icons";
+import { Cross1Icon, UpdateIcon } from "@radix-ui/react-icons";
 import Admin from "@/components/layouts/Admin";
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { Class } from "@/types";
@@ -12,6 +12,9 @@ import AttendeesDialogTable from "@/components/AttendeesDialogTable";
 import CreateClassDialog from "@/components/CreateClassDialog";
 import UpdateClassDialog from "@/components/UpdateClassDialog";
 import { difficultyTranslator } from "@/translations";
+import Image from "next/image";
+import CheckIcon from "@/assets/svg/CheckIcon.svg";
+import CrossIcon from "@/assets/svg/CrossIcon.svg";
 
 const columnHelper = createColumnHelper<Class>();
 
@@ -46,9 +49,9 @@ export const columns: ColumnDef<Class, string[] & string & boolean>[] = [
     cell: (props) => {
       const isActive = props.getValue();
       if (isActive) {
-        return <CheckIcon />;
+        return <Image src={CheckIcon} alt="Check icon" />;
       }
-      return <Cross1Icon />;
+      return <Image src={CrossIcon} alt="Cross icon" />;
     },
   }),
   columnHelper.accessor("id", {

@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 import { NextPageWithLayout } from "../_app";
 import ContentLayout from "@/components/layouts/ContentLayout";
 import Auth from "@/components/layouts/Auth";
-import { CheckIcon, Cross1Icon, UpdateIcon } from "@radix-ui/react-icons";
+import { UpdateIcon } from "@radix-ui/react-icons";
 import Admin from "@/components/layouts/Admin";
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { Employee } from "@/types";
@@ -11,6 +11,9 @@ import { useEmployees } from "@/hooks/use-employees";
 import CreateEmployeeDialog from "@/components/CreateEmployeeDialog";
 import UpdateEmployeeDialog from "@/components/UpdateEmployeeDialog";
 import { roleTranslator } from "@/translations";
+import Image from "next/image";
+import CheckIcon from "@/assets/svg/CheckIcon.svg";
+import CrossIcon from "@/assets/svg/CrossIcon.svg";
 
 const columnHelper = createColumnHelper<Employee>();
 
@@ -28,9 +31,9 @@ export const columns: ColumnDef<Employee, boolean & string>[] = [
     cell: (props) => {
       const isActive = props.getValue();
       if (isActive) {
-        return <CheckIcon />;
+        return <Image src={CheckIcon} alt="Check icon" />;
       }
-      return <Cross1Icon />;
+      return <Image src={CrossIcon} alt="Cross icon" />;
     },
   }),
   columnHelper.accessor("role", {
