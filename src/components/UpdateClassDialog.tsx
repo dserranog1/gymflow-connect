@@ -7,21 +7,26 @@ import {
   AlertDialogTrigger,
 } from "./ui/alert-dialog";
 import { Button } from "./ui/button";
-import CreateEmployeeForm from "./forms/CreateEmployeeForm";
+import UpdateClassForm from "./forms/UpdateClassForm";
+import { Class } from "@/types";
 
-const CreateEmployeeDialog: FC = () => {
+interface Props {
+  classData: Class;
+}
+
+const UpdateClassDialog: FC<Props> = ({ classData }) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button
           variant="outline"
-          className="mb-4 bg-green-200 hover:bg-green-100"
+          className="mb-4 bg-orange-200 hover:bg-orange-100"
         >
-          Create employee
+          Update class
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
-        <CreateEmployeeForm />
+        <UpdateClassForm classData={classData} />
         <AlertDialogFooter>
           <AlertDialogCancel>Close</AlertDialogCancel>
         </AlertDialogFooter>
@@ -30,4 +35,4 @@ const CreateEmployeeDialog: FC = () => {
   );
 };
 
-export default CreateEmployeeDialog;
+export default UpdateClassDialog;

@@ -7,7 +7,7 @@ import {
   AlertDialogTrigger,
 } from "./ui/alert-dialog";
 import { Button } from "./ui/button";
-import CreateClassForm from "./forms/CreateClass";
+import CreateClassForm from "./forms/CreateClassForm";
 
 const CreateClassDialog: FC = () => {
   return (
@@ -21,7 +21,7 @@ const CreateClassDialog: FC = () => {
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
-        <CreateClassForm/>
+        <CreateClassForm />
         <AlertDialogFooter>
           <AlertDialogCancel>Close</AlertDialogCancel>
         </AlertDialogFooter>

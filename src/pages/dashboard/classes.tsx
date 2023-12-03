@@ -11,10 +11,11 @@ import { useClasses } from "@/hooks/use-classes";
 import AttendeesDialogTable from "@/components/AttendeesDialogTable";
 import { Button } from "@/components/ui/button";
 import CreateClassDialog from "@/components/CreateClassDialog";
+import UpdateClassDialog from "@/components/UpdateClassDialog";
 
 const columnHelper = createColumnHelper<Class>();
 
-export const columns: ColumnDef<Class, string[]>[] = [
+export const columns: ColumnDef<Class, string[] & string>[] = [
   {
     accessorKey: "name",
     header: "Name",
@@ -37,6 +38,12 @@ export const columns: ColumnDef<Class, string[]>[] = [
     accessorKey: "maxAttendees",
     header: "Maximum attendees",
   },
+  columnHelper.accessor("id", {
+    header: "",
+    cell: (props) => {
+      return <UpdateClassDialog classData={props.row.original} />;
+    },
+  }),
 ];
 
 const Classes: NextPageWithLayout = () => {
