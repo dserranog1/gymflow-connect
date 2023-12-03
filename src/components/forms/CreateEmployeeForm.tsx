@@ -28,6 +28,7 @@ import {
 } from "../ui/select";
 import { queryClient } from "@/pages/_app";
 import { Switch } from "../ui/switch";
+import { AlertDialogCancel } from "../ui/alert-dialog";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Campo requerido" }),
@@ -167,12 +168,14 @@ export const CreateEmployeeForm = () => {
           </Button>
         ) : (
           <>
-            <Button
-              className="mb-4 bg-green-500 hover:bg-green-400"
-              type="submit"
-            >
-              Crear
-            </Button>
+            <AlertDialogCancel asChild>
+              <Button
+                className="mb-4 bg-green-500 hover:bg-green-400"
+                type="submit"
+              >
+                Crear
+              </Button>
+            </AlertDialogCancel>
           </>
         )}
       </form>

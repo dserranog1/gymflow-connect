@@ -33,6 +33,7 @@ import {
 } from "../ui/select";
 import { queryClient } from "@/pages/_app";
 import { FC } from "react";
+import { AlertDialogCancel } from "../ui/alert-dialog";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Campo requerido" }),
@@ -204,12 +205,14 @@ export const UpdateClassForm: FC<Props> = ({ classData }) => {
           </Button>
         ) : (
           <>
-            <Button
-              className="mb-4 bg-orange-500 hover:bg-orange-400"
-              type="submit"
-            >
-              Actualizar
-            </Button>
+            <AlertDialogCancel asChild>
+              <Button
+                className="mb-4 bg-orange-500 hover:bg-orange-400"
+                type="submit"
+              >
+                Actualizar
+              </Button>
+            </AlertDialogCancel>
           </>
         )}
       </form>
