@@ -29,6 +29,7 @@ import {
 import { queryClient } from "@/pages/_app";
 import { Switch } from "../ui/switch";
 import { AlertDialogCancel } from "../ui/alert-dialog";
+import { roleTranslator } from "@/translations";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Campo requerido" }),
@@ -120,7 +121,7 @@ export const CreateEmployeeForm = () => {
           name="isActive"
           render={({ field }) => (
             <FormItem className="flex flex-row items-center justify-between">
-              <FormLabel>Activo</FormLabel>
+              <FormLabel>Habilitado</FormLabel>
               <FormControl>
                 <Switch
                   checked={field.value}
@@ -144,16 +145,16 @@ export const CreateEmployeeForm = () => {
                 </FormControl>
                 <SelectContent>
                   <SelectItem value={EmployeeRol.class_trainer}>
-                    {EmployeeRol.class_trainer}
+                    {roleTranslator[EmployeeRol.class_trainer]}
                   </SelectItem>
                   <SelectItem value={EmployeeRol.personal_trainer}>
-                    {EmployeeRol.personal_trainer}
+                    {roleTranslator[EmployeeRol.personal_trainer]}
                   </SelectItem>
                   <SelectItem value={EmployeeRol.support}>
-                    {EmployeeRol.support}
+                    {roleTranslator[EmployeeRol.support]}
                   </SelectItem>
                   <SelectItem value={EmployeeRol.trainer}>
-                    {EmployeeRol.trainer}
+                    {roleTranslator[EmployeeRol.trainer]}
                   </SelectItem>
                 </SelectContent>
               </Select>

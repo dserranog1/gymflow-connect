@@ -17,13 +17,13 @@ const CreateEmployeeDialog: FC = () => {
           variant="outline"
           className="mb-4 bg-green-200 hover:bg-green-100"
         >
-          Create employee
+          Crear empleado
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <CreateEmployeeForm />
         <AlertDialogFooter>
-          <AlertDialogCancel>Close</AlertDialogCancel>
+          <AlertDialogCancel>Cerrar</AlertDialogCancel>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

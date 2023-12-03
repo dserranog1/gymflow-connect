@@ -22,13 +22,13 @@ const UpdateEmployeeDialog: FC<Props> = ({ employeeData }) => {
           variant="outline"
           className="mb-4 bg-orange-200 hover:bg-orange-100"
         >
-          Update
+          Actualizar
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <UpdateEmployeeForm employeeData={employeeData} />
         <AlertDialogFooter>
-          <AlertDialogCancel>Close</AlertDialogCancel>
+          <AlertDialogCancel>Cerrar</AlertDialogCancel>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

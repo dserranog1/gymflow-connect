@@ -10,20 +10,21 @@ import { DataTable } from "@/components/ui/data-table";
 import { useEmployees } from "@/hooks/use-employees";
 import CreateEmployeeDialog from "@/components/CreateEmployeeDialog";
 import UpdateEmployeeDialog from "@/components/UpdateEmployeeDialog";
+import { roleTranslator } from "@/translations";
 
 const columnHelper = createColumnHelper<Employee>();
 
 export const columns: ColumnDef<Employee, boolean & string>[] = [
   {
     accessorKey: "name",
-    header: "Name",
+    header: "Nombre",
   },
   {
     accessorKey: "lastName",
-    header: "Last Name",
+    header: "Apellido",
   },
   columnHelper.accessor("isActive", {
-    header: "Activo",
+    header: "Habilitado",
     cell: (props) => {
       const isActive = props.getValue();
       if (isActive) {
@@ -32,10 +33,10 @@ export const columns: ColumnDef<Employee, boolean & string>[] = [
       return <Cross1Icon />;
     },
   }),
-  {
-    accessorKey: "role",
-    header: "Current role",
-  },
+  columnHelper.accessor("role", {
+    header: "Rol actual",
+    cell: (props) => roleTranslator[props.getValue()],
+  }),
   columnHelper.accessor("id", {
     header: "",
     cell: (props) => {
