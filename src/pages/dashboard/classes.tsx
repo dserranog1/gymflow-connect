@@ -9,9 +9,9 @@ import { Class } from "@/types";
 import { DataTable } from "@/components/ui/data-table";
 import { useClasses } from "@/hooks/use-classes";
 import AttendeesDialogTable from "@/components/AttendeesDialogTable";
-import { Button } from "@/components/ui/button";
 import CreateClassDialog from "@/components/CreateClassDialog";
 import UpdateClassDialog from "@/components/UpdateClassDialog";
+import { difficultyTranslator } from "@/translations";
 
 const columnHelper = createColumnHelper<Class>();
 
@@ -30,10 +30,10 @@ export const columns: ColumnDef<Class, string[] & string & boolean>[] = [
     accessorKey: "date",
     header: "Fecha",
   },
-  {
-    accessorKey: "difficulty",
+  columnHelper.accessor("difficulty", {
     header: "Dificultad",
-  },
+    cell: (props) => difficultyTranslator[props.getValue()],
+  }),
   {
     accessorKey: "maxAttendees",
     header: "Maximos asistentes",
