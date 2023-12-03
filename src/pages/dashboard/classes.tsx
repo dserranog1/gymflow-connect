@@ -26,10 +26,13 @@ export const columns: ColumnDef<Class, string[] & string & boolean>[] = [
       return <AttendeesDialogTable usersIds={props.getValue()} />;
     },
   }),
-  {
-    accessorKey: "date",
+  columnHelper.accessor("date", {
     header: "Fecha",
-  },
+    cell: (props) => {
+      const date = new Date(props.getValue());
+      return `${date.getUTCFullYear()}/${date.getUTCMonth()}/${date.getUTCDate()}`;
+    },
+  }),
   columnHelper.accessor("difficulty", {
     header: "Dificultad",
     cell: (props) => difficultyTranslator[props.getValue()],
