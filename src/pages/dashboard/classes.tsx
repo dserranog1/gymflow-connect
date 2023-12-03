@@ -2,7 +2,7 @@ import { ReactElement } from "react";
 import { NextPageWithLayout } from "../_app";
 import ContentLayout from "@/components/layouts/ContentLayout";
 import Auth from "@/components/layouts/Auth";
-import { UpdateIcon } from "@radix-ui/react-icons";
+import { CheckIcon, Cross1Icon, UpdateIcon } from "@radix-ui/react-icons";
 import Admin from "@/components/layouts/Admin";
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { Class } from "@/types";
@@ -15,7 +15,7 @@ import UpdateClassDialog from "@/components/UpdateClassDialog";
 
 const columnHelper = createColumnHelper<Class>();
 
-export const columns: ColumnDef<Class, string[] & string>[] = [
+export const columns: ColumnDef<Class, string[] & string & boolean>[] = [
   {
     accessorKey: "name",
     header: "Name",
@@ -38,6 +38,16 @@ export const columns: ColumnDef<Class, string[] & string>[] = [
     accessorKey: "maxAttendees",
     header: "Maximum attendees",
   },
+  columnHelper.accessor("isActive", {
+    header: "Activa",
+    cell: (props) => {
+      const isActive = props.getValue();
+      if (isActive) {
+        return <CheckIcon />;
+      }
+      return <Cross1Icon />;
+    },
+  }),
   columnHelper.accessor("id", {
     header: "",
     cell: (props) => {

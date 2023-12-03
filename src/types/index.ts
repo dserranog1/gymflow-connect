@@ -21,6 +21,7 @@ export interface Class {
   date: Date;
   attendees: string[];
   difficulty: Difficulty;
+  isActive: boolean
 }
 
 export enum EmployeeRol {

@@ -33,6 +33,7 @@ import {
 } from "../ui/select";
 import { queryClient } from "@/pages/_app";
 import { AlertDialogCancel } from "../ui/alert-dialog";
+import { Switch } from "../ui/switch";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Campo requerido" }),
@@ -43,6 +44,7 @@ const formSchema = z.object({
   difficulty: z.nativeEnum(Difficulty, {
     required_error: "Debe ser una de:  high, medium, low",
   }),
+  isActive: z.boolean(),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -56,6 +58,7 @@ export const CreateClassForm = () => {
       name: "",
       date: new Date(),
       maxAttendees: 0,
+      isActive: true,
     },
   });
   const createNewClass = useMutation({
@@ -189,6 +192,21 @@ export const CreateClassForm = () => {
                 </SelectContent>
               </Select>
               <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="isActive"
+          render={({ field }) => (
+            <FormItem className="flex flex-row items-center justify-between">
+              <FormLabel>Activa</FormLabel>
+              <FormControl>
+                <Switch
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </FormControl>
             </FormItem>
           )}
         />
