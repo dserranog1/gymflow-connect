@@ -16,11 +16,11 @@ import { DataTable } from "./ui/data-table";
 export const columns: ColumnDef<User>[] = [
   {
     accessorKey: "name",
-    header: "Name",
+    header: "Nombre",
   },
   {
     accessorKey: "lastName",
-    header: "Last Name",
+    header: "Apellido",
   },
   {
     accessorKey: "email",
