@@ -28,6 +28,7 @@ import {
 } from "../ui/select";
 import { queryClient } from "@/pages/_app";
 import { Switch } from "../ui/switch";
+import { FC } from "react";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Campo requerido" }),
@@ -40,26 +41,33 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>;
 
-export const CreateEmployeeForm = () => {
+interface Props {
+  employeeData: Employee;
+}
+
+export const UpdateEmployeeForm: FC<Props> = ({ employeeData }) => {
   const router = useRouter();
   const { toast } = useToast();
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
-      lastName: "",
-      isActive: true,
+      name: employeeData.name,
+      lastName: employeeData.lastName,
+      isActive: employeeData.isActive,
+      role: employeeData.role,
     },
   });
-  const createNewEmployee = useMutation({
-    mutationFn: (employeeData: FormData) => {
-      return pb.collection("employees").create<Employee>(employeeData);
+  const updateEmployee = useMutation({
+    mutationFn: (newEmployeeData: FormData) => {
+      return pb
+        .collection("employees")
+        .update<Employee>(employeeData.id, newEmployeeData);
     },
     onSuccess: (newEmployee) => {
       queryClient.invalidateQueries({ queryKey: ["employees"] });
       toast({
         title: `Registo exitoso`,
-        description: `Se ha creado el empleado ${newEmployee.name}`,
+        description: `Se ha actualizado el empleado ${newEmployee.name}`,
       });
       router.push("/dashboard/employees");
     },
@@ -77,7 +85,7 @@ export const CreateEmployeeForm = () => {
   });
   const onSubmit = (values: FormData) => {
     console.log(values);
-    createNewEmployee.mutate(values, {
+    updateEmployee.mutate(values, {
       onSuccess: () => {
         form.reset();
       },
@@ -160,7 +168,7 @@ export const CreateEmployeeForm = () => {
             </FormItem>
           )}
         />
-        {createNewEmployee.isLoading ? (
+        {updateEmployee.isLoading ? (
           <Button disabled>
             <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
             Procesando
@@ -168,10 +176,10 @@ export const CreateEmployeeForm = () => {
         ) : (
           <>
             <Button
-              className="mb-4 bg-green-500 hover:bg-green-400"
+              className="mb-4 bg-orange-500 hover:bg-orange-400"
               type="submit"
             >
-              Crear
+              Actualizar
             </Button>
           </>
         )}
@@ -180,4 +188,4 @@ export const CreateEmployeeForm = () => {
   );
 };
 
-export default CreateEmployeeForm;
+export default UpdateEmployeeForm;

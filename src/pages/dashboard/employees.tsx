@@ -9,10 +9,11 @@ import { Employee } from "@/types";
 import { DataTable } from "@/components/ui/data-table";
 import { useEmployees } from "@/hooks/use-employees";
 import CreateEmployeeDialog from "@/components/CreateEmployeeDialog";
+import UpdateEmployeeDialog from "@/components/UpdateEmployeeDialog";
 
 const columnHelper = createColumnHelper<Employee>();
 
-export const columns: ColumnDef<Employee, boolean>[] = [
+export const columns: ColumnDef<Employee, boolean & string>[] = [
   {
     accessorKey: "name",
     header: "Name",
@@ -35,6 +36,12 @@ export const columns: ColumnDef<Employee, boolean>[] = [
     accessorKey: "role",
     header: "Current role",
   },
+  columnHelper.accessor("id", {
+    header: "",
+    cell: (props) => {
+      return <UpdateEmployeeDialog employeeData={props.row.original} />;
+    },
+  }),
 ];
 
 const Employees: NextPageWithLayout = () => {

@@ -32,8 +32,9 @@ export enum EmployeeRol {
 }
 
 export interface Employee {
+  id: string
   name: string,
   lastName: string,
   isActive: boolean,
-
+  role: EmployeeRol
 }
