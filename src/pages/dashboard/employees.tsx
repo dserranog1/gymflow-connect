@@ -2,16 +2,17 @@ import { ReactElement } from "react";
 import { NextPageWithLayout } from "../_app";
 import ContentLayout from "@/components/layouts/ContentLayout";
 import Auth from "@/components/layouts/Auth";
-import { UpdateIcon } from "@radix-ui/react-icons";
+import { CheckIcon, Cross1Icon, UpdateIcon } from "@radix-ui/react-icons";
 import Admin from "@/components/layouts/Admin";
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { Employee } from "@/types";
 import { DataTable } from "@/components/ui/data-table";
-import CreateClassDialog from "@/components/CreateClassDialog";
 import { useEmployees } from "@/hooks/use-employees";
 import CreateEmployeeDialog from "@/components/CreateEmployeeDialog";
 
-export const columns: ColumnDef<Employee>[] = [
+const columnHelper = createColumnHelper<Employee>();
+
+export const columns: ColumnDef<Employee, boolean>[] = [
   {
     accessorKey: "name",
     header: "Name",
@@ -20,10 +21,16 @@ export const columns: ColumnDef<Employee>[] = [
     accessorKey: "lastName",
     header: "Last Name",
   },
-  {
-    accessorKey: "isActive",
-    header: "Is active",
-  },
+  columnHelper.accessor("isActive", {
+    header: "Activo",
+    cell: (props) => {
+      const isActive = props.getValue();
+      if (isActive) {
+        return <CheckIcon />;
+      }
+      return <Cross1Icon />;
+    },
+  }),
   {
     accessorKey: "role",
     header: "Current role",
