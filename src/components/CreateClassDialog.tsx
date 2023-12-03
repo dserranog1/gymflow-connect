@@ -23,7 +23,7 @@ const CreateClassDialog: FC = () => {
       <AlertDialogContent>
         <CreateClassForm />
         <AlertDialogFooter>
-          <AlertDialogCancel>Close</AlertDialogCancel>
+          <AlertDialogCancel>Cerrar</AlertDialogCancel>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

@@ -34,6 +34,7 @@ import {
 import { queryClient } from "@/pages/_app";
 import { AlertDialogCancel } from "../ui/alert-dialog";
 import { Switch } from "../ui/switch";
+import { difficultyTranslator } from "@/translations";
 
 const formSchema = z.object({
   name: z.string().min(1, { message: "Campo requerido" }),
@@ -115,7 +116,7 @@ export const CreateClassForm = () => {
             name="maxAttendees"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Máximos asistentes</FormLabel>
+                <FormLabel>Máximos asistentes*</FormLabel>
                 <FormControl>
                   <Input type="number" {...field} />
                 </FormControl>
@@ -181,13 +182,13 @@ export const CreateClassForm = () => {
                 </FormControl>
                 <SelectContent>
                   <SelectItem value={Difficulty.low}>
-                    {Difficulty.low}
+                    {difficultyTranslator[Difficulty.low]}
                   </SelectItem>
                   <SelectItem value={Difficulty.medium}>
-                    {Difficulty.medium}
+                    {difficultyTranslator[Difficulty.medium]}
                   </SelectItem>
                   <SelectItem value={Difficulty.high}>
-                    {Difficulty.high}
+                    {difficultyTranslator[Difficulty.high]}
                   </SelectItem>
                 </SelectContent>
               </Select>
