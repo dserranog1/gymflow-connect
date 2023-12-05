@@ -15,7 +15,7 @@ const CreateClassDialog: FC = () => {
       <AlertDialogTrigger asChild>
         <Button
           variant="outline"
-          className="mb-4 bg-orange-600 hover:bg-orange-400"
+          className="mb-4 bg-orange-600 hover:bg-orange-400 text-white"
         >
           Crear clase
         </Button>

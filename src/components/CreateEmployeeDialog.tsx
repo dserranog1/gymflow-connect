@@ -15,7 +15,7 @@ const CreateEmployeeDialog: FC = () => {
       <AlertDialogTrigger asChild>
         <Button
           variant="outline"
-          className="mb-4 bg-green-200 hover:bg-green-100"
+          className="mb-4 bg-orange-600 hover:bg-orange-400 text-white"
         >
           Crear empleado
         </Button>

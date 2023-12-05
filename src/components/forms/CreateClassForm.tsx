@@ -220,7 +220,7 @@ export const CreateClassForm = () => {
           <>
             <AlertDialogCancel asChild>
               <Button
-                className="mb-4 bg-green-500 hover:bg-green-400"
+                className="mb-4 bg-orange-600 hover:bg-orange-400 text-white"
                 type="submit"
               >
                 Crear
