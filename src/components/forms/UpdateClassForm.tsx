@@ -226,7 +226,7 @@ export const UpdateClassForm: FC<Props> = ({ classData }) => {
           <>
             <AlertDialogCancel asChild>
               <Button
-                className="mb-4 bg-yellow-300 hover:bg-yellow-100"
+                className="mb-4 bg-blue-300 hover:bg-blue-100"
                 type="submit"
               >
                 Actualizar

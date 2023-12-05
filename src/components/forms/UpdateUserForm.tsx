@@ -140,7 +140,7 @@ export const UpdateUserForm = ({ user }: { user: User }) => {
           </Button>
         ) : (
           <>
-            <Button className="bg-orange-600 hover:bg-orange-400" type="submit">
+            <Button className="mb-4 bg-blue-300 hover:bg-blue-100" type="submit">
               Actualizar
             </Button>
             <Button asChild variant="link">

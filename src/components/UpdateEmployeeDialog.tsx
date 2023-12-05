@@ -20,7 +20,7 @@ const UpdateEmployeeDialog: FC<Props> = ({ employeeData }) => {
       <AlertDialogTrigger asChild>
         <Button
           variant="outline"
-          className="mb-4 bg-yellow-300 hover:bg-yellow-100"
+          className="mb-4 bg-blue-300 hover:bg-blue-100"
         >
           Actualizar
         </Button>
