@@ -55,7 +55,7 @@ const AttendeesDialogTable: FC<Props> = ({ usersIds }) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="outline">Mostrar todos</Button>
+        <Button variant="outline"  className="bg-orange-200 hover:bg-orange-100">Mostrar todos</Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <DataTable columns={columns} data={users} />
