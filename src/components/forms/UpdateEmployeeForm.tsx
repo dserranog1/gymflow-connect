@@ -179,7 +179,7 @@ export const UpdateEmployeeForm: FC<Props> = ({ employeeData }) => {
           <>
             <AlertDialogCancel asChild>
               <Button
-                className="mb-4 bg-green-300 hover:bg-green-100"
+                className="mb-4 bg-yellow-300 hover:bg-yellow-100"
                 type="submit"
               >
                 Actualizar

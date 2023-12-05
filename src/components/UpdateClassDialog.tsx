@@ -20,7 +20,7 @@ const UpdateClassDialog: FC<Props> = ({ classData }) => {
       <AlertDialogTrigger asChild>
         <Button
           variant="outline"
-          className="mb-4 bg-orange-200 hover:bg-orange-100"
+          className="mb-4 bg-yellow-300 hover:bg-yellow-100"
         >
           Actualizar
         </Button>
