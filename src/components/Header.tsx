@@ -27,9 +27,10 @@ const Header = () => {
                 </div>
               )}
               <div className="px-4">
-                Sesión iniciada como{" "}
+                ¡Hola {" "}
                 <span className="text-white">
-                  {user.name + " " + user.lastName}
+                  {user.name.charAt(0).toUpperCase() + user.name.slice(1)}{" "}
+                  {user.lastName.charAt(0).toUpperCase() + user.lastName.slice(1)}!
                 </span>
               </div>
             </>
